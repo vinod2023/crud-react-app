@@ -1,0 +1,96 @@
+.App {
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* Style the header */
+.header {
+  background-color: #f1f1f1;
+  padding: 5px;
+  text-align: center;
+}
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 15px 30px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Create three equal columns that floats next to each other */
+.postTaskForm {
+  max-width: 500px;
+  margin-left: 470px;
+  margin-top: 100px;
+  padding: 80px;
+  background-color: rgb(208, 216, 228);
+  border-radius: 20px;
+}
+.button {
+  margin-top: 10px; 
+  padding: 6px 6px 6px 6px;
+  color: blue;
+}
+.error {
+  margin-top: 20px;
+  color: red;
+}
+.text{
+  margin-top: 20px;
+  color: green;
+  font-size: 17px;
+}
+.title{
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.tableData{
+  border: 1px solid black;
+}
+.thead th{
+  font-size: 18px;
+  background-color: rgb(175, 162, 162);
+  border: 1px solid rgba(0, 0, 0, 0.233);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.tableRow:nth-child(even){
+  background-color: rgb(250, 244, 244);
+}
+
+@media screen and (max-width:900px) {
+  .form {
+    margin-left: 100px;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-height:500px) {
+  .form {
+    margin-top: 10px;
+    padding: 10px;
+  }
+}
+
+

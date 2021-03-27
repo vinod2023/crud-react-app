@@ -1,0 +1,2 @@
+export const GET_USER_TOKEN = "GET_USER_TOKEN";
+export const USER_TOKEN_ERROR = 'USER_TOKEN_ERROR';

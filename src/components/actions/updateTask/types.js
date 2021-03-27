@@ -1,0 +1,3 @@
+export const UPDATE_TASK = "UPDATE_TASK";
+export const UPDATE_TASK_ERROR = "UPDATE_TASK_ERROR";
+export const UPDATE_TASK_ID = "UPDATE_TASK_ID";

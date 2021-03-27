@@ -1,0 +1,2 @@
+export const SINGLE_TASK = "SINGLE_TASK";
+export const SINGLE_TASK_ERROR = "SINGLE_TASK_ERROR";
