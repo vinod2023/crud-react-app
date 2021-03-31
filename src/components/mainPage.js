@@ -1,22 +1,79 @@
-import React from 'react';
-import {Box} from '@material-ui/core';
-import {Route, Switch} from 'react-router-dom';
+import React, { useState } from 'react';
+import AddIcon from '@material-ui/icons/Add';
+import PostTaskForm from './postTaskForm';
+import { getTokenData } from './actions/getToken/actions';
+import { connect } from 'react-redux';
 import MainBody from './mainBody';
-import PostTask from './postTaskForm';
-import EditTask from './editTask';
-import GetTask from './getTask';
+import { getAllTasksData } from './actions/getAllTasks/actions';
 
-function MainPage() {
+function MainPage(props) {
+
+    const [isAddPostClicked, setIsAddPostClicked] = useState(false);
+    const fetchPosts = React.useRef(() => { })
+
+    fetchPosts.current = () => {
+        if (props.tasks.length === 0)
+            props.userToken();
+    }
+
+    React.useEffect(() => {
+        fetchPosts.current();
+    }, [])
+
+    const getAllPostsOnReRender = async () => {
+        let headers = {
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + props.token
+            }
+        }
+        await props.getAllTasks(headers)
+    }
+
+    const updateIsAddPostTrue = () => {
+        setIsAddPostClicked(true)
+    }
+
+    const updateIsAddPostFalse = () => {
+        setIsAddPostClicked(false)
+    }
+
     return (
-        <Box>
-            <Switch>
-                 <Route path="/" component={MainBody} exact />
-                 <Route path="/posttask" component={PostTask} />
-                 <Route path="/edittask" component={EditTask} />
-                 <Route path="/gettask" component={GetTask} />
-            </Switch>
-        </Box>
+        <div className="postTaskForm">
+            <div className="postTop">
+                <div className="postHeader">
+                    Tasks {props.tasks.length}
+                </div>
+                <button className="postIcon" title="add task" onClick={() => setIsAddPostClicked(true)}>
+                    <AddIcon ></AddIcon>
+                </button>
+            </div>
+            <div className="postBody">
+                {
+                    isAddPostClicked ?
+                        <PostTaskForm updateIsAddPostFalse={() => updateIsAddPostFalse()} getAllPostsOnReRender={() => getAllPostsOnReRender()} /> :
+                        <MainBody updateIsAddPostTrue={() => updateIsAddPostTrue()} getAllPostsOnReRender={() => getAllPostsOnReRender()} />
+                }
+
+            </div>
+        </div>
     )
 }
 
-export default MainPage
+const mapStateToProps = (state) => {
+    return {
+        token: state.token,
+        id: state.id,
+        tasks: state.tasks
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        userToken: () => dispatch(getTokenData()),
+        getAllTasks: (headers) => dispatch(getAllTasksData(headers))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage)
